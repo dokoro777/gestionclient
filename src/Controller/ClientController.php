@@ -27,6 +27,7 @@ class ClientController extends AbstractController {
              ->setCodeclient("1234");
         $this->em->persist($client);
         $this->em->flush();
+        
 
         return $this->render("page/client.html.twig",
         [
