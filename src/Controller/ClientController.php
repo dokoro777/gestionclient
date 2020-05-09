@@ -24,10 +24,11 @@ class ClientController extends AbstractController {
          $client->setAdresse("derkle")
              ->setNom("Dokoro")
              ->setPrenom("francky")
-             ->setCodeclient("1234");
+             ->setCodeclient("1234")
+             ->setTel("78900");
         $this->em->persist($client);
         $this->em->flush();
-        
+
 
         return $this->render("page/client.html.twig",
         [
