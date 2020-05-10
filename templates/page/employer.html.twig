@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="jumbotron">
+        <h1 class="display-4">Gestion des Employer</h1>
+        <hr class="my-4">
+    </div>
+    <div class="container">
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Fonction</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for e in employs %}
+                    <tr>
+                        <td>{{e.nom}}</td>
+                        <td>{{e.prenom}}</td>
+                        <td>{{e.adresse}}</td>
+                        <td>{{e.fonction}}</td>
+                        <td> <a href="" class="fa fa-eye btn btn-sm" title="show details "> Voir</a>
+                            <a href="{{ path('employe_create', {'id': e.id })}}" class="fa fa-edit btn btn-sm" title="Editer employer "> Editer</a>
+                            <form onsubmit="return confirm('Voulez-vous supprimer {{e.nom  ~ '  ' ~ e.prenom }}  ? ')"
+                                  method="post" action="{{ path('employer_delete', {'id': e.id } )}}" style="display:inline-block;">
+                                <input  type="hidden" method name="_method" value="DELETE" />
+                                <input  type="hidden" name="_token" value="{{ csrf_token('delete' ~ e.id )}}" />
+                                <button type="submit" class="fa fa-remove btn btn-sm btn-danger"> Supprimer<button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
