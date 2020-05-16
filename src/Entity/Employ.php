@@ -17,6 +17,16 @@ class Employ
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Departement", inversedBy="employees")
+     */
+    private $departement;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FicheServiceEmployer", mappedBy="employe")
+     */
+    private $ficheserviceemployes;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nom;
@@ -88,4 +98,21 @@ class Employ
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDepartement()
+    {
+        return $this->departement;
+    }
+
+    /**
+     * @param mixed $departement
+     */
+    public function setDepartement($departement): void
+    {
+        $this->departement = $departement;
+    }
+    
 }

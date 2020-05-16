@@ -17,6 +17,11 @@ class Client
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FicheService", mappedBy="client")
+     */
+    private $ficheservices;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $nom;

@@ -25,7 +25,7 @@ class DepartementController extends AbstractController
     }
 
     /**
-     * @Route("/departement/dep", name="departement_dep")
+     * @Route("/departement", name="departement_dep")
      *
      * @return Response
      */
@@ -61,7 +61,7 @@ class DepartementController extends AbstractController
     }
 
     /**
-     * @Route("/departement/new", name="departement_create", requirements={"id":"[0-9]*"})
+     * @Route("/departement/new", name="departement_create")
      *
      */
     public function add(Request $request) : Response
@@ -74,7 +74,7 @@ class DepartementController extends AbstractController
             $this->em->persist($departement);
             $this->em->flush();
             $this->addFlash('success', 'Le departement a été bien ajouté!');
-            return $this->redirectToRoute('dep');
+            return $this->redirectToRoute('departement_dep');
         }
         return $this->render('/page/addDepartement.html.twig',[
                 'form' => $form->createView()

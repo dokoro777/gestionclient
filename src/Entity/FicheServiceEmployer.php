@@ -16,6 +16,12 @@ class FicheServiceEmployer
      */
     private $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employ", inversedBy="ficheserviceemployes")
+     */
+    private $employe;
+
+
     public function getId(): ?int
     {
         return $this->id;

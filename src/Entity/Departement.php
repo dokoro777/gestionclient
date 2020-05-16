@@ -17,6 +17,24 @@ class Departement
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Employ", mappedBy="departement")
+     */
+    private $employees;
+
+    public function __construct()
+    {
+        $this->employees = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Employee[]
+     */
+    public function getEmployees(): Collection
+    {
+        return $this->employees;
+    }
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nom;

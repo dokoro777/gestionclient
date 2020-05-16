@@ -17,6 +17,11 @@ class FicheService
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", inversedBy="ficheservices")
+     */
+    private $client;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $numero;
