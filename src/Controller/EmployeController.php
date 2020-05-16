@@ -39,7 +39,7 @@ class EmployeController extends AbstractController
     }
 
     /**
-     * @Route("/employe/edit/{id}", name="employe_create", methods="GET|POST|PUT", requirements={"id":"[0-9]*"})
+     * @Route("/employe/edit/{id}", name="employe_edit", methods="GET|POST|PUT", requirements={"id":"[0-9]*"})
      * @param Employ $employer
      * @return Response
      */
@@ -52,7 +52,7 @@ class EmployeController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $this->em->flush();
             $this->addFlash('success', 'employer a été bien edité!');
-            return $this->redirectToRoute('show');
+            return $this->redirectToRoute('employe_show');
         }
         return $this->render('/page/editEmployer.html.twig',[
                 'form' => $form->createView()
@@ -94,10 +94,10 @@ class EmployeController extends AbstractController
             $this->em->remove($employ);
             $this->em->flush();
             $this->addFlash('success', 'employer a été bien supprimé!');
-            return $this->redirectToRoute('show');
+            return $this->redirectToRoute('employe_show');
         }
 
-        return $this->redirectToRoute('show');
+        return $this->redirectToRoute('employe_show');
     }
 
 }

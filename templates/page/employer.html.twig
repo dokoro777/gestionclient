@@ -24,7 +24,7 @@
                         <td>{{e.adresse}}</td>
                         <td>{{e.fonction}}</td>
                         <td> <a href="" class="fa fa-eye btn btn-sm" title="show details "> Voir</a>
-                            <a href="{{ path('employe_create', {'id': e.id })}}" class="fa fa-edit btn btn-sm" title="Editer employer "> Editer</a>
+                            <a href="{{ path('employe_edit', {'id': e.id })}}" class="fa fa-edit btn btn-sm" title="Editer employer "> Editer</a>
                             <form onsubmit="return confirm('Voulez-vous supprimer {{e.nom  ~ '  ' ~ e.prenom }}  ? ')"
                                   method="post" action="{{ path('employer_delete', {'id': e.id } )}}" style="display:inline-block;">
                                 <input  type="hidden" method name="_method" value="DELETE" />
