@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,11 @@ class Employ
      * @ORM\Column(type="string", length=255)
      */
     private $fonction;
+
+    public function __construct()
+    {
+        $this->ficheserviceemployes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -99,20 +106,49 @@ class Employ
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDepartement()
+    public function getDepartement(): ?Departement
     {
         return $this->departement;
     }
 
-    /**
-     * @param mixed $departement
-     */
-    public function setDepartement($departement): void
+    public function setDepartement(?Departement $departement): self
     {
         $this->departement = $departement;
+
+        return $this;
     }
-    
+
+    /**
+     * @return Collection|FicheServiceEmployer[]
+     */
+    public function getFicheserviceemployes(): Collection
+    {
+        return $this->ficheserviceemployes;
+    }
+
+    public function addFicheserviceemploye(FicheServiceEmployer $ficheserviceemploye): self
+    {
+        if (!$this->ficheserviceemployes->contains($ficheserviceemploye)) {
+            $this->ficheserviceemployes[] = $ficheserviceemploye;
+            $ficheserviceemploye->setEmploye($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFicheserviceemploye(FicheServiceEmployer $ficheserviceemploye): self
+    {
+        if ($this->ficheserviceemployes->contains($ficheserviceemploye)) {
+            $this->ficheserviceemployes->removeElement($ficheserviceemploye);
+            // set the owning side to null (unless already changed)
+            if ($ficheserviceemploye->getEmploye() === $this) {
+                $ficheserviceemploye->setEmploye(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
+
 }

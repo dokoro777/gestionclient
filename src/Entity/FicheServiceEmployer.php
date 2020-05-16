@@ -26,4 +26,16 @@ class FicheServiceEmployer
     {
         return $this->id;
     }
+
+    public function getEmploye(): ?Employ
+    {
+        return $this->employe;
+    }
+
+    public function setEmploye(?Employ $employe): self
+    {
+        $this->employe = $employe;
+
+        return $this;
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -45,6 +47,11 @@ class Client
      * @ORM\Column(type="string", length=255)
      */
     private $tel;
+
+    public function __construct()
+    {
+        $this->ficheservices = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -107,6 +114,37 @@ class Client
     public function setTel(string $tel): self
     {
         $this->tel = $tel;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FicheService[]
+     */
+    public function getFicheservices(): Collection
+    {
+        return $this->ficheservices;
+    }
+
+    public function addFicheservice(FicheService $ficheservice): self
+    {
+        if (!$this->ficheservices->contains($ficheservice)) {
+            $this->ficheservices[] = $ficheservice;
+            $ficheservice->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFicheservice(FicheService $ficheservice): self
+    {
+        if ($this->ficheservices->contains($ficheservice)) {
+            $this->ficheservices->removeElement($ficheservice);
+            // set the owning side to null (unless already changed)
+            if ($ficheservice->getClient() === $this) {
+                $ficheservice->setClient(null);
+            }
+        }
 
         return $this;
     }

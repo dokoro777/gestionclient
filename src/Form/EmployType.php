@@ -18,9 +18,7 @@ class EmployType extends AbstractType
             ->add('prenom')
             ->add('adresse')
             ->add('fonction')
-            ->add('departement', EntityType::class,[
-                'class'=> Departement::class, 'choice_label' => 'Departement'
-            ])
+            ->add('departement')
         ;
     }
 
